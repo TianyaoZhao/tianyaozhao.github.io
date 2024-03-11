@@ -1,4 +1,4 @@
-<!-- * 深度学习 -->
+* 深度学习
   * [深度学习日记](/ProjectDocs/DeepLearning/DeepLearning_NoteBook-backup.md)
 
 * 算法竞赛
