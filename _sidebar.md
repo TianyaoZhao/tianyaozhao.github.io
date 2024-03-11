@@ -1,5 +1,5 @@
 <!-- * 深度学习 -->
-  <!-- * [深度学习日记](/ProjectDocs/DeepLearning/DeepLearning_NoteBook.md) -->
+  * [深度学习日记](/ProjectDocs/DeepLearning/DeepLearning_NoteBook.md)
 
 * 算法竞赛
   * [C++算法竞赛](/ProjectDocs/Algorithm/CPP_Algorithm.md)
