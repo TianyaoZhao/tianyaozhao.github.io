@@ -11,7 +11,7 @@
 > 😈 爱生活 爱分享！如果觉得还不错的话，要记得好好学习哟~
 
 ## 推荐阅读
-<!-- - [深度学习笔记](/ProjectDocs/DeepLearning/DeepLearning_NoteBook.md)     -->
+- [深度学习笔记](/ProjectDocs/DeepLearning/DeepLearning_NoteBook-backup.md)    
 - [C++算法竞赛](/ProjectDocs/Algorithm/CPP_Algorithm.md)
 
 
