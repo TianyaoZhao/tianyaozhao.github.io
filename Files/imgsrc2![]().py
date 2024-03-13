@@ -21,4 +21,4 @@ def convert_img_tags(input_path, output_path):
 
 
 # 替换Markdown文件中的所有<img>标签
-convert_img_tags('CPP_Algorithm.md', 'outa.md')
+convert_img_tags('Files\PUBG_UE5_蓝图开发日记\PUBG.md', 'PUBG_UE5.md')
