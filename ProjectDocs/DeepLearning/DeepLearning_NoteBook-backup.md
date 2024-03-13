@@ -1,3 +1,5 @@
+# 理论知识
+
 ## 相机几何
 
 将**三维世界中的坐标点**（单位为米）映射到**二维图像平面**（单位为像素）的过程
@@ -9288,6 +9290,32 @@ git checkout v5.0
 
 
 ### git上传大文件 >100MB
+### git设置clash代理
+
+参考知乎
+
+[解决 Github port 443 : Timed out - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/636418854)
+
+```bash
+# 取消代理
+git config --global --unset http.proxy
+git config --global --unset https.proxy
+
+# 查看代理
+git config --global --get http.proxy
+git config --global --get https.proxy
+```
+
+
+
+因为用clash，设置clash代理
+
+```bash
+git config --global http.proxy 127.0.0.1:7890
+git config --global https.proxy 127.0.0.1:7890
+```
+
+速度飞起！
 
 
 
