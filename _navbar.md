@@ -24,3 +24,7 @@
 * 常用链接
   * [ReadPaper](https://readpaper.com/)
   * [Markdown 基本语法](https://markdown.com.cn/basic-syntax/)
+  * [Quick Reference](https://quickref.cn/)
+  * [Free CS Book](https://github.com/yinhonggen/free-programming-books-zh_CN)
+  * [CS 自学指南](https://github.com/PKUFlyingPig/cs-self-learning)
+  * [CS Basic Knowledge](https://github.com/CS-BAOYAN/CSBasicKnowledge)
