@@ -8,25 +8,25 @@ Assets
 
 Blueprents
 
-    Characters
+Characters
 
-    BlendSpace 混合空间 （存放游戏角色动画）
+BlendSpace 混合空间 （存放游戏角色动画）
 
-    AimOffets 瞄准偏移 （存放瞄准偏移动画）
+AimOffets 瞄准偏移 （存放瞄准偏移动画）
 
-    Montage 蒙太奇 （存放角色动画蒙太奇）
+Montage 蒙太奇 （存放角色动画蒙太奇）
 
-    MyAnimBlueprint 动画蓝图 （控制动画）
+MyAnimBlueprint 动画蓝图 （控制动画）
 
-    Gameplay 游戏框架
+Gameplay 游戏框架
 
-    Datas 静态数据文件
+Datas 静态数据文件
 
-    DataTable 数据表文件
+DataTable 数据表文件
 
-    TableStructure Table用到的Structure文件
+TableStructure Table用到的Structure文件
 
-    Items 所有物品对象
+Items 所有物品对象
 
 Maps
 
@@ -2085,4 +2085,53 @@ get weight
 
 ## 随机物品类型
 
+1. 创建函数RandomItemtype
+
+    ![image-20240314153544737](./.assets/image-20240314153544737.png)
+
+2. 修改GenerateItems
+
+    ![image-20240314153935977](./.assets/image-20240314153935977.png)
+
+3. 测试
+
+    ![image-20240314155236432](./.assets/image-20240314155236432.png)
+
+    ![image-20240314155248442](./.assets/image-20240314155248442.png)
+
+4. 显示随机物品名称
+
+    ![image-20240314155310024](./.assets/image-20240314155310024.png)
+
+
+
+
+
 ## 随机物品编号
+
+
+
+1. 创建新的结构体
+
+    ![image-20240314155518359](./.assets/image-20240314155518359.png)
+
+    ![image-20240314155527314](./.assets/image-20240314155527314.png)
+
+    
+
+2. 创建函数RandomItemID
+
+    ![image-20240314163516329](./.assets/image-20240314163516329.png)
+
+3. 修改generateitems
+
+    ![image-20240314163530703](./.assets/image-20240314163530703.png)
+
+
+
+## 添加对应武器的子弹对象
+
+## 随机物品的生成的位置
+
+
+
