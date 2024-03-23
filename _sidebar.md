@@ -1,5 +1,7 @@
 * 深度学习
   * [深度学习日记](/ProjectDocs/DeepLearning/DeepLearning_NoteBook-backup.md)
+  * [服务器使用](/ProjectDocs/DeepLearning/服务器/服务器使用.md)
+  * [Agent](/ProjectDocs/DeepLearning/大模型/Agent.md)
 
 * 算法竞赛
   * [C++算法竞赛](/ProjectDocs/Algorithm/CPP_Algorithm.md)
