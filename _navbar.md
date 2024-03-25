@@ -9,6 +9,7 @@
   * [Tmux](/ProjectDocs/Tools/Tmux.md)
   * [Vim Tmux配置](/ProjectDocs/Tools/Vim%20Tmux配置.md)
   * [管道](/ProjectDocs/Tools/管道.md)
+  * [Latex](/ProjectDocs/Tools/Latex.md)
 
 * 408专业课
   * [数据结构](/ProjectDocs/408/数据结构.md)
