@@ -1,5 +1,7 @@
 * 深度学习
-  * [深度学习日记](/ProjectDocs/DeepLearning/DeepLearning_NoteBook-backup.md)
+  * [理论知识](/ProjectDocs/DeepLearning/理论知识/理论知识.md)
+  * [Python语法](/ProjectDocs/DeepLearning/Python/Python语法.md)
+  * [Pytorch](/ProjectDocs/DeepLearning/Pytorch/Pytorch.md)
   * [服务器使用](/ProjectDocs/DeepLearning/服务器/服务器使用.md)
   * [Agent](/ProjectDocs/DeepLearning/大模型/Agent.md)
 
@@ -16,6 +18,7 @@
   * [Tmux](/ProjectDocs/Tools/Tmux.md)
   * [Vim Tmux配置](/ProjectDocs/Tools/Vim%20Tmux配置.md)
   * [管道](/ProjectDocs/Tools/管道.md)
+  * [Latex](/ProjectDocs/Tools/Latex.md)
 
 * Web前端
   * [HTML](/ProjectDocs/Web/HTML.md)

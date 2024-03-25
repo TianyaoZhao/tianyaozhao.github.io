@@ -28,3 +28,4 @@
   * [Free CS Book](https://github.com/yinhonggen/free-programming-books-zh_CN)
   * [CS 自学指南](https://github.com/PKUFlyingPig/cs-self-learning)
   * [CS Basic Knowledge](https://github.com/CS-BAOYAN/CSBasicKnowledge)
+  * [视频素材网站](https://www.sohu.com/a/133366976_692322)

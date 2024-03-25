@@ -1,3 +1,5 @@
+# SSH与SCP
+
 ## ssh
 
 ### 基本用法
@@ -140,5 +142,15 @@ scp -P 22 source1 source2 destination
 
 ```bash
 scp ~/.vimrc ~/.tmux.conf ~/.bashrc myserver:/home/acs/
+```
+
+
+
+
+
+  源                                                                目的
+
+```shell
+scp -r -P 10002 root@192.168.43.101:~/datasets/nuscenes ./
 ```
 

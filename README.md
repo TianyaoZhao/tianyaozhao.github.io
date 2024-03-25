@@ -11,8 +11,21 @@
 > 😈 爱生活 爱分享！如果觉得还不错的话，要记得好好学习哟~
 
 ## 推荐阅读
-- [深度学习笔记](/ProjectDocs/DeepLearning/DeepLearning_NoteBook-backup.md)    
+- [理论知识](/ProjectDocs/DeepLearning/理论知识/理论知识.md)
+- [Python语法](/ProjectDocs/DeepLearning/Python/Python语法.md)
+- [Pytorch](/ProjectDocs/DeepLearning/Pytorch/Pytorch.md)
+- [服务器使用](/ProjectDocs/DeepLearning/服务器/服务器使用.md)   
 - [C++算法竞赛](/ProjectDocs/Algorithm/CPP_Algorithm.md)
+
+- [Anaconda](/ProjectDocs/Tools/Anaconda.md)
+- [Git](/ProjectDocs/Tools/Git.md)
+- [Docker](/ProjectDocs/Tools/Docker.md)
+- [Vim](/ProjectDocs/Tools/Vim.md)
+- [SSH SCP](/ProjectDocs/Tools/SSH%20SCP.md)
+- [Tmux](/ProjectDocs/Tools/Tmux.md)
+- [Vim Tmux配置](/ProjectDocs/Tools/Vim%20Tmux配置.md)
+- [管道](/ProjectDocs/Tools/管道.md)
+- [Latex](/ProjectDocs/Tools/Latex.md)
 
 
 

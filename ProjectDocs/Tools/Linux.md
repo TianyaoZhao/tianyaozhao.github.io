@@ -69,4 +69,4 @@ tree  -a -d -L 1
     - `which cp`输出`usr/bin/cp`
 15. `find`：查找文件(按文件名字、按文件大小)
     - `find 起始路径 -name “被查找文件名”`
-    - `find 起始路径 -size -10k`：查找小于10kb的文件
+        - `find 起始路径 -size -10k`：查找小于10kb的文件
