@@ -12,8 +12,6 @@
 
     ![image-20240328182901530](./.assets/image-20240328182901530.png)
 
-- 
-
 
 
 ## 修改标注格式，将VOC格式改为Yolo格式
@@ -300,21 +298,25 @@ python3 train.py --data datasets/helmet/coco.data
 
 
 
+得到290个epoch下的权重文件 
+
+![image-20240328205756645](./.assets/image-20240328205756645.png)
+
+## 测试
+
+```
+python3 evaluation.py --data datasets/helmet/coco.data --weights weights/coco-290-epoch-0.427704ap-model.pth 
+```
 
 
 
+![image-20240328210059747](./.assets/image-20240328210059747.png)
 
 
 
-​    
+**精确度达到40%左右**
 
 
-
-​    
-
-​    
-
-  
 
 **相比较于yolov5s，参数量少了接近30倍**
 
@@ -323,6 +325,26 @@ python3 train.py --data datasets/helmet/coco.data
 
 
 ![image-20240328194510137](./.assets/image-20240328194510137.png)
+
+
+
+
+
+## 单张推理
+
+
+
+```shell
+python3 test.py --data datasets/helmet/coco.data --weights weights/coco-290-epoch-0.427704ap-model.pth --img datasets/helmet/images/hard_hat_workers0.png 
+```
+
+
+
+![image-20240328211229528](./.assets/image-20240328211229528.png)
+
+
+
+单张图片推理速度在79ms左右
 
 
 

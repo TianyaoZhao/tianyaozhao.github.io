@@ -23,6 +23,7 @@
 
 * 项目
   * [Yolo-Fastv2安全帽检测](/ProjectDocs/DeepLearning/项目/Yolo-Fastv2-安全帽检测/Yolo-Fastv2-安全帽检测.md)
+  * [Jeston Nano](/ProjectDocs/DeepLearning/项目/JestonNanoKit/JestonNanoKit.md)
 
 * Web前端
   * [HTML](/ProjectDocs/Web/HTML.md)
