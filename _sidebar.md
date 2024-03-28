@@ -4,6 +4,7 @@
   * [Pytorch](/ProjectDocs/DeepLearning/Pytorch/Pytorch.md)
   * [服务器使用](/ProjectDocs/DeepLearning/服务器/服务器使用.md)
   * [Agent](/ProjectDocs/DeepLearning/大模型/Agent.md)
+  * [书生·浦语大模型](/ProjectDocs/DeepLearning/大模型/书生浦语大模型/书生·浦语大模型.md)
 
 * 算法竞赛
   * [C++算法竞赛](/ProjectDocs/Algorithm/CPP_Algorithm.md)
@@ -19,6 +20,9 @@
   * [Vim Tmux配置](/ProjectDocs/Tools/Vim%20Tmux配置.md)
   * [管道](/ProjectDocs/Tools/管道.md)
   * [Latex](/ProjectDocs/Tools/Latex.md)
+
+* 项目
+  * [Yolo-Fastv2安全帽检测](/ProjectDocs/DeepLearning/项目/Yolo-Fastv2-安全帽检测/)
 
 * Web前端
   * [HTML](/ProjectDocs/Web/HTML.md)
