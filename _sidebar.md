@@ -43,6 +43,10 @@
   * [高等数学](/ProjectDocs/数学/高等数学.md)
   * [线性代数](/ProjectDocs/数学/线性代数.md)
   * [概率论与数理统计](/ProjectDocs/数学/概率论与数理统计.md)
+
+* 面试
+  * [数学](/ProjectDocs/面试/数学/数学.md)
+  * [专业课](/ProjectDocs/面试/专业课/)
   
 * Blog搭建
   * [Docsify使用指南](/ProjectDocs/Blog搭建/Docsify使用指南.md)
