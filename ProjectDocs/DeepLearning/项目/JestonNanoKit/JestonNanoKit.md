@@ -93,3 +93,45 @@
 ## 初始化linux系统
 
 连接键盘鼠标，插上sd卡，连好屏幕，直接使用
+
+
+
+
+
+## 配置无线网卡
+
+在一开始的时候，笔者发现板子有无线网卡，但是一直连接不上无线网
+
+1. 查看网络状态
+
+    ```shell
+    sudo nmcli device status
+    ```
+
+    发现wlan0 连接状态是disconnected
+
+2. [linux使用无线网卡连接WiFi - 简书 (jianshu.com)](https://www.jianshu.com/p/763450626434)
+
+3. 检查可用网卡
+
+    ```shell
+    iw dev
+    ```
+
+    interface 后显示wlan0
+
+4. 检查网卡状态
+
+    ```shell
+    ip link show wlan0
+    ```
+
+    发现`<>`没有up字段，表示网卡没有激活
+
+5. 激活网卡
+
+    ```shell
+    sudo ip link set wlan0 up
+    ```
+
+    
