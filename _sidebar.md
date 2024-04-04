@@ -46,7 +46,8 @@
 
 * 面试
   * [数学](/ProjectDocs/面试/数学/数学.md)
-  * [专业课](/ProjectDocs/面试/专业课/)
+  * [专业课](/ProjectDocs/面试/专业课/专业课.md)
+  * [口语](/ProjectDocs/面试/英语/口语常见问题.md)
   
 * Blog搭建
   * [Docsify使用指南](/ProjectDocs/Blog搭建/Docsify使用指南.md)
