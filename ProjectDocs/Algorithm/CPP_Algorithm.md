@@ -5433,3 +5433,28 @@ cout << s.length();
 
 ```
 
+
+
+
+
+### 拆分数的每一位
+
+```C++
+while(x){
+    int t = x % 10; // 当前位
+    x = x / 10;
+}
+```
+
+
+
+
+
+### 数组去重
+
+```C++
+vector<int> res;
+res.push_back(x);
+res.erase(unique(res.begin(), res.end()), res.end());
+```
+
