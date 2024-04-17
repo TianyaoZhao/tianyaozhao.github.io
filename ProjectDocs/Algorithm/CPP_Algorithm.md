@@ -5401,6 +5401,14 @@ bool cmp(node &x, node &y){
 sort(a, a + n);
 ```
 
+- 按照数字的最高位从大到小排
+
+```C++
+bool cmp(string a, string b){
+    return a + b > b + a;
+}
+```
+
 
 
 ### 函数返回数组
@@ -5419,21 +5427,102 @@ sort(a, a + n);
 
 
 
-### 字符串处理
+### 字符串读入
+
+- `cin` 遇到 空格 TAB 回车结束
 
 ```C++
 char s[N];
+// 这种方式读到空格会停止读入
 cin >> s + 1;          // 从字符串下标为1开始读入
 scanf("%s", s + 1);    // 从字符串下标为1开始读入
 cout << strlen(s + 1); // 字符串长度 asda = 4
-
+// 这种方式读到空格会停止读入
 string s = "";
 cin >> s; cout << s;
 cout << s.length();
 
 ```
 
+- `cin.getline()`
 
+```
+// 接收一个字符串，可以接收空格并输出
+char s[N];
+cin.getline(s, 100);
+```
+
+1、`cin.getline()`实际上有三个参数，`cin.getline(接收字符串的变量,接收字符个数,结束字符)`
+2、当第三个参数省略时，系统默认为`'\0'`
+3、如果将例子中`cin.getline()`改为`cin.getline(m,5,'a');`当输入`jlkjakljkl`时输出`jklj`，输入`jkaljkljkl`时，输出`jk`
+
+
+
+- `getline()`
+
+```
+// 接收一个字符串，可以接收空格并输出，需包含“#include<string>”
+# include <string>
+string s;
+getline(cin, s);
+```
+
+
+
+### 字符串函数
+
+- erase
+
+    删除string数组的写法
+
+    ```C++
+    string s;
+    // s.erase(起始位置pos, 往后删掉几个字符n)
+    
+    s = "abcdef";
+    s.erase(0, 2);
+    cout << s;        // cdef
+    ```
+
+    删除vector数组写法
+
+    ```C++
+    vector <int> a;
+    a.erase(a.begin(), a.end())
+    ```
+
+- find
+
+    字符串查找返回字符出现的位置
+
+    ```
+    s = "abcdef";
+    cout << s.find("de");  //4 
+    ```
+
+- compare
+
+    判断两个字符串是否相等
+
+    ```C++
+    string s1, s2;
+    s1.compare(s2);
+    // s1 < s2; -1
+    // s1 = s2; 0
+    // s1 > s2; 1
+    ```
+
+    判断两个char数组
+
+    ```C++
+    char s1[N], s2[N];
+    stcmp(s1, s2);
+    // s1 < s2; -1
+    // s1 = s2; 0
+    // s1 > s2; 1
+    ```
+
+    
 
 
 
@@ -5457,4 +5546,85 @@ vector<int> res;
 res.push_back(x);
 res.erase(unique(res.begin(), res.end()), res.end());
 ```
+
+
+
+### 数组首尾对应
+
+1. 当数组从1开始，元素个数为n
+
+    ```C++
+    for(int i = 1; i <= n; i ++) a[i] = a[n + 1 - i]
+    ```
+
+2. 当数组从0开始，元素个数为n
+
+    ```
+    for(int i = 0; i < n; i ++) a[i] = a[n - 1 - i]
+    ```
+
+### 日期枚举
+
+核心思想：将日期视为八位数，然后从小到大枚举，只需要判断这个数是否是合法的即可
+
+- 获取年数，月份数，天数
+
+    ```C++
+    int year = date / 10000, month = date % 10000 / 100, day = date % 100;
+    ```
+
+- 月份数组
+
+    ```C++
+    int days[13] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    ```
+
+- 检查是否是合法的日期
+
+    ```C++
+    bool check(int year, int month, int day){
+        if(month < 0 || month > 12) return false;
+    
+        if(day == 0) return false;
+    
+        // 特判二月闰年的情况
+        if(month != 2){
+            if(day > days[month]) return false;
+        }
+        else{
+            int leap = year % 4 == 0 && year % 100 || year % 400 == 0;
+            if(day > days[2] + leap) return false;
+        }
+        return true;
+    }
+    ```
+
+    ```C++
+    int main(){
+        cin >> date1 >> date2;
+        for(int i = date1; i <= date2; i ++){
+            int year = i / 10000, month = i % 10000 / 100, day = i % 100;
+            if(check(year, month, day)) cout << i << endl;
+            // cout << i << endl;
+        }
+        return 0;
+    }
+    ```
+
+- ### 四舍五入
+
+    1. 使用cmath
+
+        ```
+        # include <cmath>
+        round(1.5) // 2
+        ```
+
+    2. 使用printf
+
+        ```C++
+        printf("%.2f", 1.245); //1.25
+        ```
+
+        
 
