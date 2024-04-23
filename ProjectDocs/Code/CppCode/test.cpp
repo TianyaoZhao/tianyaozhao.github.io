@@ -10,4 +10,4 @@ int k = 0;
 int main(){
     printf("%.2f", 1.245);
 }
-
+a
