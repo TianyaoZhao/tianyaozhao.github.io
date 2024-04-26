@@ -3981,7 +3981,9 @@ $lcm(a,b) = \frac {ab}{gcd(a,b)}$
 
 ### 质数
 
-#### 试除法判质数-$O( \sqrt n)$
+#### 试除法判质数
+
+时间复杂度-$O( \sqrt n)$
 
 https://www.luogu.com.cn/problem/P5736
 
@@ -5611,20 +5613,128 @@ res.erase(unique(res.begin(), res.end()), res.end());
     }
     ```
 
-- ### 四舍五入
+### 排列数枚举和组合数枚举
 
-    1. 使用cmath
+1. 递归实现排列型枚举
 
-        ```
-        # include <cmath>
-        round(1.5) // 2
-        ```
+   把1~n这些整数进行全排列
 
-    2. 使用printf
+   ```C++
+   int path[N];
+   bool vis[N];
+   void dfs(int u){
+   	if(u == n + 1){       // 达到个数要求
+   		for(int i = 1; i <= n; i ++){
+               cout << path[i] << " ";
+           }
+           cout << endl;
+           return;
+   	}
+   
+       for(int i = 1; i <= n; i ++){
+           if(!vis[i]){      // 当前数可选
+               path[u] = i;
+               vis[i] = true;
+               dfs(u + 1);
+               path[u] = 0;  // 恢复现场
+               vis[i] = false;
+           }
+       }
+   }
+   
+   dfs(1);
+   ```
 
-        ```C++
-        printf("%.2f", 1.245); //1.25
-        ```
+2. 递归实现组合型枚举
 
-        
+   把1~n这些整数选出m个进行组合排列
+
+   ```C++
+   int n, m;
+   vector <int> path;
+   void dfs(int u){
+       //  剪枝:当前选的数大于m 或 当前选的数+剩下没选的数小于m
+       if(path.size() > m || path.size() + (n - u + 1) < m) return;
+       if(u == n + 1){ // 问题的边界
+           for(int i = 0; i < path.size();  i ++){
+               cout << path[i];
+           }
+           cout << endl;
+           return;
+       }
+       // 不选数u分支
+       dfs(u + 1);
+   
+       // 选数u分支
+       path.push_back(u);
+       dfs(u + 1);
+   
+       // 恢复现场
+       path.pop_back();
+   }
+   
+   dfs(1)
+   ```
+
+3. 递归实现整数型枚举
+
+   把1~n这些整数随机选取任意多个，每个整数可以选取好几次
+
+   ```C++
+   int n, m;
+   vector <int> path;
+   void dfs(int u){
+       if(u == n + 1){ // 问题的边界
+           for(int i = 0; i < path.size();  i ++){
+               cout << path[i];
+           }
+           cout << endl;
+           return;
+       }
+       // 不选数u分支
+       dfs(u + 1);
+   
+       // 选数u分支
+       path.push_back(u);
+       dfs(u + 1);
+   
+       // 恢复现场
+       path.pop_back();
+   }
+   
+   dfs(1);
+   ```
+
+4. 如果要对数组中的数进行排列枚举或者是组合枚举
+
+   ```C++
+   // 数组读入
+   for(int i = 1; i <= n; i ++) cin >> a[i];
+   // dfs枚举下标1~n
+   // 每次取数的时候
+   for(int i = 0; i < path.size(); i ++){
+       int idx = path[i];
+       // 取 a[i]
+   }
+   ```
+
+   
+
+### 四舍五入
+
+1. 使用cmath
+
+    ```
+    # include <cmath>
+    round(1.5) // 2
+    ```
+
+2. 使用printf
+
+    ```C++
+    printf("%.2f", 1.245); //1.25
+    ```
+
+
+​        
 
