@@ -9,7 +9,7 @@ const int N = 10;
 int days[13] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 int date1, date2;
 bool check(int year, int month, int day){
-    if(month < 0 || month > 12) return false;
+    if(month < 1 || month > 12) return false;
 
     if(day == 0) return false;
 
@@ -18,6 +18,7 @@ bool check(int year, int month, int day){
         if(day > days[month]) return false;
     }
     else{
+        // 四年一闰百年不闰or四百年一闰
         int leap = year % 4 == 0 && year % 100 || year % 400 == 0;
         if(day > days[2] + leap) return false;
     }

@@ -5546,6 +5546,7 @@ while(x){
 ```C++
 vector<int> res;
 res.push_back(x);
+sort(res.begin(), res.end());
 res.erase(unique(res.begin(), res.end()), res.end());
 ```
 
@@ -5585,7 +5586,7 @@ res.erase(unique(res.begin(), res.end()), res.end());
 
     ```C++
     bool check(int year, int month, int day){
-        if(month < 0 || month > 12) return false;
+        if(month < 1 || month > 12) return false;
     
         if(day == 0) return false;
     
