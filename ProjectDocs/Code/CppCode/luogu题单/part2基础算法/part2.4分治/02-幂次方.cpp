@@ -13,16 +13,17 @@ using namespace std;
 typedef pair <int, int> PII;
 typedef long long LL;
 // const int N = 
+int n;
+void dfs(int n){
+    int t = n;
+    int cnt  = 0;
+    while(t){
+        if(t & 1) cnt ++;
+    }
+}
 void solve(){
-    double Pi = 3.1415926;
-    int n = 2;
-    cout << fixed << setprecision(2) << Pi << endl; // 3.14
-    cout << fixed << setprecision(3) << Pi << endl; // 3.142
-    cout << 2 << endl;  // 2
-    cout << setprecision(2) << Pi << endl; // 3.14
-    // 关闭fixed,改为保留有效数字模式
-    cout.unsetf(ios::fixed);
-    cout << setprecision(2) << Pi << endl; // 3.1
+    cin >> n;
+    dfs(n);
 }
 int main(){
     io_speed

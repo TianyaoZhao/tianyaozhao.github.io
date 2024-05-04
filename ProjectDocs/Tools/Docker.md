@@ -33,7 +33,7 @@ sudo usermod -aG docker $USER
 
 5. `docker [container] restart CONTAINER`：重启容器
 
-6. `docker [contaienr] run -itd ubuntu:20.04`：创建并启动一个容器
+6. `docker [contaienr] run -itd ubuntu:20.04`：利用ubuntu20.04创建并启动一个容器
 
 7. `docker [container] attach CONTAINER`：进入容器
 

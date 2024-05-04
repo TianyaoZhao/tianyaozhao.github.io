@@ -146,7 +146,7 @@ scp ~/.vimrc ~/.tmux.conf ~/.bashrc myserver:/home/acs/
 
 
 
-
+**登录到我的服务器上，从别的服务器传过来**
 
   源                                                                目的
 
@@ -154,3 +154,8 @@ scp ~/.vimrc ~/.tmux.conf ~/.bashrc myserver:/home/acs/
 scp -r -P 10002 root@192.168.43.101:~/datasets/nuscenes ./
 ```
 
+**登录到别的服务器，从别的服务器上传文件到我的服务器**
+
+1. 到别的服务器上的文件夹
+2. scp djano.tar root@39.107.139.152:~/
+3. 后面的ip是我的ip

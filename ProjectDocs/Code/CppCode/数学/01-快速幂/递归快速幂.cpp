@@ -1,3 +1,6 @@
+// https://www.luogu.com.cn/problem/P1226
+// 快速幂采用二进制拆分和倍增思想
+// 3^{13} = 3^{(1101)_2} = 3^8·3^4·3^1
 # include <iostream>
 # include <cstring>
 # include <algorithm>
@@ -13,16 +16,13 @@ using namespace std;
 typedef pair <int, int> PII;
 typedef long long LL;
 // const int N = 
+LL a, b, p;
+LL quickpow(LL a, LL b, LL p){
+    // 如果b是偶数, 先计算 a^(b / 2)次方，直到计算到 a^1
+}
 void solve(){
-    double Pi = 3.1415926;
-    int n = 2;
-    cout << fixed << setprecision(2) << Pi << endl; // 3.14
-    cout << fixed << setprecision(3) << Pi << endl; // 3.142
-    cout << 2 << endl;  // 2
-    cout << setprecision(2) << Pi << endl; // 3.14
-    // 关闭fixed,改为保留有效数字模式
-    cout.unsetf(ios::fixed);
-    cout << setprecision(2) << Pi << endl; // 3.1
+    cin >> a >> b >> p;
+    cout << a << "^" << b << " mod " << p << "=" << quickpow(a, b, p);
 }
 int main(){
     io_speed
