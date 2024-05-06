@@ -14,12 +14,21 @@ typedef pair <int, int> PII;
 typedef long long LL;
 // const int N = 
 int n;
-void dfs(int n){
-    int t = n;
-    int cnt  = 0;
-    while(t){
-        if(t & 1) cnt ++;
+void dfs(int x){
+    if(x == 0) cout << "2(0)";
+    else if(x == 1) cout << "2";
+    else if(x == 2) cout << "2(2)";
+    else{
+        int t = x;
+        int cnt = - 1;
+        while(t){
+            cnt ++;
+            if(t & 1){
+                dfs(cnt);
+        }
     }
+    }
+    
 }
 void solve(){
     cin >> n;
