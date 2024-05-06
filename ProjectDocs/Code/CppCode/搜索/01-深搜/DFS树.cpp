@@ -2,6 +2,7 @@
 # include <iostream>
 # include <cstring>
 # include <algorithm>
+# include <vector>
 using namespace std;
 const int N = 300 + 10;
 int n, m;      // n个点m条边

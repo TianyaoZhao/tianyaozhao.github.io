@@ -1224,6 +1224,8 @@ int find(int x){// a[1~n]
 
 #### 二分答案
 
+**看到最小，最大的字眼，就是二分了**
+
 看单调性
 
 时间复杂度-$O(logn)$
@@ -3821,7 +3823,11 @@ int query(int p, int x, int y){ // 区间查询
 
 ## 数学
 
-### 快速幂-$O(logn)$
+### 快速幂
+
+**非递归快速幂**
+
+时间复杂度-$O(logn)$
 
 https://www.luogu.com.cn/problem/P1226
 
@@ -3831,7 +3837,7 @@ $a^n = a × a × ··· × a$暴力计算需要`O(n)`的时间
 
 **快速幂**使用**二进制拆分和倍增**思想，仅需要`O(logn)`的时间
 
-对`n`做二进制拆分，例如，$3^{13} = 3^{(1011)_2} = 3^8·3^4·3^1$
+对`n`做二进制拆分，例如，$3^{13} = 3^{(1101)_2} = 3^8·3^4·3^1$
 
 对`a`做平方倍增，例如，$3^1,3^2,3^4,3^8······$
 
@@ -3890,6 +3896,18 @@ int main(){
     cin >> a >> b >> p;
     cout << quickpow(a, b, p);
     return 0;
+}
+```
+
+递归快速幂
+
+![image-20240218135450206](./.assets/mehayq-3.webp)
+
+```C++
+LL quickpow(LL a, LL b, LL p){
+    if(b == 0) return 1;
+    if(b % 2 == 0) return quickpow(a, b / 2) * quick(a, b / 2) % p;
+    if(b % 2 == 1) return quickpow(a, b - 1) * a % p;
 }
 ```
 
@@ -5546,6 +5564,7 @@ while(x){
 ```C++
 vector<int> res;
 res.push_back(x);
+sort(res.begin(), res.end());
 res.erase(unique(res.begin(), res.end()), res.end());
 ```
 
@@ -5585,7 +5604,7 @@ res.erase(unique(res.begin(), res.end()), res.end());
 
     ```C++
     bool check(int year, int month, int day){
-        if(month < 0 || month > 12) return false;
+        if(month < 1 || month > 12) return false;
     
         if(day == 0) return false;
     
@@ -5676,7 +5695,7 @@ res.erase(unique(res.begin(), res.end()), res.end());
    dfs(1)
    ```
 
-3. 递归实现整数型枚举
+3. 递归实现指数型枚举
 
    把1~n这些整数随机选取任意多个，每个整数可以选取好几次
 
@@ -5705,7 +5724,29 @@ res.erase(unique(res.begin(), res.end()), res.end());
    dfs(1);
    ```
 
-4. 如果要对数组中的数进行排列枚举或者是组合枚举
+4. 递归实现指数型枚举
+
+   ```C++
+   int n, m;
+   void dfs(int u){
+       if(u == m + 1){
+           for(int i = 0; i < path.size(); i ++){
+               cout << path[i] << " ";
+           }
+           cout << endl;
+           return;
+       }
+       for(int i = 1; i <= n; i ++){
+           path.push_back(i);
+           dfs(u + 1);
+           path.pop_back();
+       }
+   }
+   ```
+
+   
+
+5. 如果要对数组中的数进行排列枚举或者是组合枚举
 
    ```C++
    // 数组读入
@@ -5735,6 +5776,37 @@ res.erase(unique(res.begin(), res.end()), res.end());
     printf("%.2f", 1.245); //1.25
     ```
 
-
 ​        
+
+
+
+### 保留精度
+
+1. cout保留小数
+
+    需要 `#include <iomanip>`
+
+    `setprecision()` 来用来保存有效数字，`fixed` 和 `setprecision()` 一起用就变成保存小数点后有效数字。
+
+    ```C++
+        double Pi = 3.1415926;
+        int n = 2;
+        cout << fixed << setprecision(2) << Pi << endl; // 3.14
+        cout << fixed << setprecision(3) << Pi << endl; // 3.142
+        cout << 2 << endl;  // 2
+        cout << setprecision(2) << Pi << endl; // 3.14
+        // 关闭fixed,改为保留有效数字模式
+        cout.unsetf(ios::fixed);
+        cout << setprecision(2) << Pi << endl; // 3.1
+    ```
+
+    
+
+2. 使用printf
+
+    ```C++
+    printf("%.2f", 1.245); //1.25
+    ```
+
+    
 
