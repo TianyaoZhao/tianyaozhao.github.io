@@ -5570,6 +5570,15 @@ res.erase(unique(res.begin(), res.end()), res.end());
 
 
 
+```C++
+vector<int> res;
+res.push_back(x);
+sort(res.begin(), res.end());
+unique(res.begin(), res.end());
+```
+
+
+
 ### 数组首尾对应
 
 1. 当数组从1开始，元素个数为n
