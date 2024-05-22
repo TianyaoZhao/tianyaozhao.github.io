@@ -31,7 +31,7 @@
     import pandas as pd
     
     
-    classes = ['helmet','head','person']
+    classes = ['helmet','	head','person']
     
     def convert_annot(size , box):
         x1 = int(box[0])
@@ -278,7 +278,11 @@
   
 ## 训练
 
-​    
+   type python python2 python3
+
+查看python环境变量
+
+
 
 
 
