@@ -17,7 +17,7 @@ sudo usermod -aG docker $USER
 1. `docker pull ubuntu:20.04`：拉取一个镜像（名称:版本号）
 2. `docker images`：列出本地所有镜像
 3. `docker image rm ubuntu:20.04 或 docker rmi ubuntu:20.04`：删除镜像`ubuntu:20.04`
-4. `docker [container] commit CONTAINER IMAGE_NAME:TAG`：创建某个`container`的镜像
+4. `docker commit [container] IMAGE_NAME:TAG`：创建某个`container`的镜像
 5. `docker save -o ubuntu_20_04.tar ubuntu:20.04`：将镜像`ubuntu:20.04`导出到本地文件`ubuntu_20_04.tar`中 **还要加上可读权限 chmod + r ubuntu_20_04.tar**
 6. `docker load -i ubuntu_20_04.tar`：将镜像`ubuntu:20.04`从本地文件`ubuntu_20_04.tar`中加载出来
 
@@ -27,15 +27,15 @@ sudo usermod -aG docker $USER
 
 2. `docker ps -a`：查看本地的所有容器状态
 
-3. `docker [container] start CONTAINER`：启动容器
+3. `docker  start [container]`：启动容器
 
-4. `docker [container] stop CONTAINER`：停止容器
+4. `docker  stop [container]`：停止容器
 
-5. `docker [container] restart CONTAINER`：重启容器
+5. `docker  restart [container]`：重启容器
 
 6. `docker [contaienr] run -itd ubuntu:20.04`：利用ubuntu20.04创建并启动一个容器
 
-7. `docker [container] attach CONTAINER`：进入容器
+7. `docker  attach [container]`：进入容器
 
 8. **先按`Ctrl + p`，再按`Ctrl + q`可以挂起容器**
 
