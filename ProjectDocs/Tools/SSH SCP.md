@@ -86,6 +86,17 @@ ssh-keygen
 ssh-copy-id myserver
 ```
 
+**服务器添加authorized_keys**
+
+```shell
+touch ~/.ssh/authorized_keys
+chmod 600 ~/.ssh/authorized_keys
+# chown username:username /home/username/.ssh/authorized_keys
+vim ~/.ssh/authorized_keys
+添加公钥 下面的
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCZI6Ux0PjRTS7qg3cY2xM2EsyJpU4NCpck+mbWiaiHBZBaeG6fMq76xD2Nvc5yn1lu6S7FroSUP2JATJcnz/8h8ea0/pS2Lj3Yp5ZYiwPk1+yMW6SESv+0Dkt04UUazlAUoSfa9vAiwIQMBnGJu2kmmtv+sfqy1IOQEJOjir6RNje35N6MC25QcdBQHawXYYX0qWXLzIBI8+za1TfllH0kcpMd+t5TLMYvTY2ZW6IXLHs0Ukp1wNXCRb3yGe+pQ0+YBS5M/tDEkyImiL4t30SCTmN//6xt3mKkigRc7WSv42C4ek1SY6AB6iMkSm1YlEolhdFomYYYZ2B6Br/Oir2N9sT7RtqYal/0kslKtHU4oMEigJPAD8XNWXpjXMWeh3O6Vuf8zOkK6X9LdXW2ZNzTrPlf5CkzLpYubkf+S5STHStCZdjCv3s8xj27B9oyHeHHldLws6a21ko5wei7zeSKyJ9dFzcVjdyGCEYORD8s5PdGOLGA3Ob54iHxLtoANvs= TianyaoZhao@LAPTOP-97STQN9J
+```
+
 
 
 ## scp
@@ -144,7 +155,7 @@ scp -P 22 source1 source2 destination
 scp ~/.vimrc ~/.tmux.conf ~/.bashrc myserver:/home/acs/
 ```
 
-
+使用案例1：
 
 **登录到我的服务器上，从别的服务器传过来**
 
@@ -153,6 +164,8 @@ scp ~/.vimrc ~/.tmux.conf ~/.bashrc myserver:/home/acs/
 ```shell
 scp -r -P 10002 root@192.168.43.101:~/datasets/nuscenes ./
 ```
+
+使用案例2:
 
 **登录到别的服务器，从别的服务器上传文件到我的服务器**
 

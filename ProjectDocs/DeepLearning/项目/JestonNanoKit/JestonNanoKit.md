@@ -94,7 +94,7 @@
 
 连接键盘鼠标，插上sd卡，连好屏幕，直接使用
 
-
+https://blog.csdn.net/qq_44053841/article/details/118335688
 
 
 
@@ -134,4 +134,14 @@
     sudo ip link set wlan0 up
     ```
 
-    
+
+还是解决不了，笔者认为是原系统没有装网卡驱动，因此试着装一下网卡驱动程序
+
+经过检查有驱动但是网卡没有激活。于是重新装了一遍驱动，问题解决了
+
+但是很快驱动就掉了
+
+https://blog.csdn.net/qwazp3526cn/article/details/121478723
+
+https://blog.csdn.net/m_zhangJingDong/article/details/78337065
+
