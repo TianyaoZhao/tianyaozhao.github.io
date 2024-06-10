@@ -382,6 +382,7 @@ https://www.luogu.com.cn/problem/P3378
 
    ```C++
    //因为不知道删除之后新加入的元素是大还是小，于是上浮和下沉都要试一次只能执行一个
+   //让末尾元素替代k的位置
    a[k] = a[cnt --];
    down(k);
    up(k);
@@ -3190,7 +3191,9 @@ cout << b << " ";
 
 ### 最小生成树
 
-#### Kruskal-$O(mlogm)$
+#### Kruskal
+
+时间复杂度$O(mlogm)$
 
 https://www.luogu.com.cn/problem/P3366
 
@@ -3223,7 +3226,7 @@ bool kruskal(){
     for(int i = 0; i < m; i ++){
         int x = find(e[i].u);
         int y = find(e[i].v);
-        if(x != y){ //考虑合并
+        if(x != y){ //考虑合并，把y加到x上
             fa[x] = y;
             ans += e[i].w; // 将权重加上
             cnt ++;  // 边数++
@@ -3282,7 +3285,9 @@ int main(){
 
 
 
-#### Prim-$O(n^2)\ O(mlogm)$
+#### Prim
+
+时间复杂度$O(n^2)\ O(mlogm)$
 
 **Prim（普里姆）算法**是基于**贪心思想**最小生成树（MST）算法
 
@@ -3310,7 +3315,7 @@ bool prim(int s){
     memset(d, 0x3f, sizeof d); //初始化所有点到圈的距离为无穷
     d[s] = 0;
     for(int i = 1; i <= n; i ++){ //迭代n次可以将所有点放入集合中
-        int u = 0;
+        int u = 0; //这一步是关键。每次都从大的里面选出来，这样可以保证是“到圈的距离”
         for(int j = 1; j <= n; j ++){
             if(!vis[j] && d[j] < d[u]) u = j;
         }
