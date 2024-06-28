@@ -16,6 +16,7 @@ typedef long long LL;
 const int N = 100 + 5;
 char s[N]; // x进制数  
 int x;     // x进制
+// 位权运算
 void x2ten(char s[], int x){
     int ans = 0;// 结果
     for(int i = 0; i < strlen(s); i ++){

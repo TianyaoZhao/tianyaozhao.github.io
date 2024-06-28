@@ -17,7 +17,18 @@ https://www.luogu.com.cn/problem/P1177
 3. 对于左右两段，再递归以上两个过程，直到每段只有一个数，即全部有序
 
 ```cpp
-	x int n, a[100005];void quicksort(int l, int r){    if(l == r) return;    int i = i - 1, j = r + 1, x = a[l + r >> 1];    while(i < j){        do i ++; while(a[i] < x);   //向右找>=x的数        do j --; while(a[j] > x);   //向左找<=x的数        if(i < j) swap(a[i], a[j]);    }    quicksort(l, j);    quicksort(j+1, r);}cpp
+x int n, a[100005];
+void quicksort(int l, int r){    
+    if(l == r) return;    
+    int i = l - 1, j = r + 1, x = a[l + r >> 1];    
+    while(i < j){        
+        do i ++; while(a[i] < x);   //向右找>=x的数        
+        do j --; while(a[j] > x);   //向左找<=x的数        
+        if(i < j) swap(a[i], a[j]);    
+    }    
+    quicksort(l, j);    
+    quicksort(j+1, r);
+}
 ```
 
 1. 退出while时， `i=j或i=j+1`，所以以`j`为分界线可以做到不重不漏
@@ -342,7 +353,7 @@ https://www.luogu.com.cn/problem/P3378
 
 ![](.assets/image-20231005122810781.png)
 
-![.assets/image-20231005122818781.png]()
+
 
 1. **堆的插入：**先将元素从**堆尾插入**，然后**上浮**到合适的位置   `O(logn)`
 
@@ -3968,7 +3979,9 @@ https://www.acwing.com/problem/content/873/
 
 ****
 
-#### 最大公约数 欧几里得算法-$O(logn)$
+#### 最大公约数 欧几里得算法
+
+时间复杂度$O(logn)$
 
 **证明：$gcd(a,b) = gcd(b, a\%b)$**
 
@@ -4025,7 +4038,9 @@ bool isprim(int x){
 
 
 
-#### 埃氏筛---$O(loglogn)$
+#### 埃氏筛
+
+时间复杂度：$O(loglogn)$
 
 https://www.luogu.com.cn/problem/P3383
 
@@ -4054,7 +4069,9 @@ void Eratosthenes(int n){//埃氏筛法
 }
 ```
 
-#### 线性筛--$O(n)$
+#### 线性筛
+
+时间复杂度：$O(n)$
 
 https://www.luogu.com.cn/problem/P3383
 
@@ -4132,6 +4149,70 @@ void decompose(int x){
 #### 试除法求欧拉函数
 
 #### 筛法求欧拉函数
+
+### 组合数
+
+#### 组合数1
+
+数据范围：ab 2000 n=100000
+$$
+C_a^{b}=\frac{a*(a-1)*...*(a-b+1)}{b*(b-1)*...*1}=\frac{a!}{b!(a-b)!}
+$$
+性质：
+
+a个苹果选b个 = 选1个苹果，从剩下a-1个苹果选b-1个 （包含）+ 不选一个苹果，从剩下a-1个苹果选b个 （不包含）
+$$
+C_a^{b} = C_{a - 1}^{b - 1} + C_{a - 1}^{b}
+$$
+递推公式：`c[i][j] = c[i - 1][j - 1] + c[i][j - 1]`
+
+```C++
+# include <iostream>
+# include <cstring>
+# include <algorithm>
+using namespace std;
+const int N = 2000 + 10, MOD = 1e9 + 7;
+int n, a, b;
+int c[N][N];
+int main(){
+    
+    for(int i = 0; i < N; i ++){
+        for(int j = 0; j <= i; j ++){
+            if(!j) c[i][j] = 1; // 规定 c_{i}^{0} = 1
+            else c[i][j] = (c[i - 1][j - 1] + c[i - 1][j]) % MOD;
+        }
+    }
+    cin >> n;
+    while(n --){
+        cin >> a >> b;
+        cout << c[a][b] << endl;
+    }
+    return 0;
+}
+```
+
+#### 组合数2
+
+数据范围：ab 100000 n=100000
+
+快速幂
+$$
+C_a^{b}=\frac{a*(a-1)*...*(a-b+1)}{b*(b-1)*...*1}=\frac{a!}{b!(a-b)!}
+$$
+
+```C++
+# include <iostream>
+# include <cstring>
+# include <algorithm>
+using namespace std;
+int n, a, b;
+typedef long long LL;
+const int N = 1e5 + 10;
+LL fact[N];
+LL qmi(int )
+```
+
+
 
 ## 动态规划
 
@@ -4422,7 +4503,7 @@ int main(){
 
 
 
-#### 最长公共子序列
+#### 最长公共子序列（离散）
 
 https://www.luogu.com.cn/problem/P1439
 
@@ -4541,7 +4622,7 @@ int main(){
 }
 ```
 
-#### 最长公共子串
+#### 最长公共子串（连续）
 
 ![image-20231008185857237](.assets/image-20231008185857237.png)
 
@@ -4684,7 +4765,9 @@ int main(){
 
 ### 背包DP
 
-#### 01背包-$O(nm)$
+#### 01背包
+
+时间复杂度-$O(nm)$
 
 **每种物品只有一件**
 
@@ -4764,7 +4847,7 @@ int main(){
 }
 ```
 
-### 完全背包-$O(nm)$
+完全背包-$O(nm)$
 
 **每种物品有无数多件**
 
@@ -4857,6 +4940,75 @@ int main(){
 #### 多重背包
 
 **每种物品有有限件**
+
+
+
+### 区间DP
+
+时间复杂度-$O(n^3)$
+
+石子合并，每次合并相邻两堆，合并后继续合并相邻，每次合并有代价，求最小代价。和用大根堆存储不太一样，因为大根堆不限制合并相邻的两堆，每次只取最小的两堆即可
+
+状态表示：`f[i][j]`表示第`i`堆石子到第`j`堆石子区间
+
+​	集合：所有将第`i`堆石子到第`j`堆石子合并成一堆石子的合并方式
+
+​	属性：所有合并方式的最小值
+
+![image-20240626154102719](./.assets/image-20240626154102719.png)
+
+从`i`到`j`，以`k`为分界线，每次都是取`f[i][k]`堆石子和`f[k+1][j]`堆石子进行合并，然后加上把这两堆合并的代价`sum(a[i]~a[j])`（前缀和处理）取遍历之后取最小值
+
+状态计算： ` i < j, f[i][j] = min(f[i][j], f[i][k]+f[k+1][j]+s[j]-s[i-1]),k=i~j-1`
+
+​			        ` i = j, f[i][j] = 0` 合并一堆石子代价为0
+
+**按区间长度从小到大枚举，保证之前的状态被计算过**
+
+```C++
+# include <iostream>
+# include <algorithm>
+# include <cstring>
+using namespace std;
+const int N = 300 + 10;
+int f[N][N];
+int n, a[N], s[N];
+int main(){
+	cin >> n;
+	for(int i = 1; i <= n; i ++){
+		cin >> a[i];
+		s[i] = s[i - 1] + a[i];
+	}
+	// 枚举长度，区间长度为1，代价是0
+	for(int len = 2; len <= n; len ++){
+		//枚举起点,注意中止条件
+		for(int i = 1; i + len - 1 <= n; i ++){
+			// 左端点 右端点
+			int l = i, r = i + len - 1;
+			// 枚举分界线,初始化一个比较大的值
+            f[l][r] = 1e8;
+			for(int k = l; k <= r - 1; k ++){
+				f[l][r] = min(f[l][r], f[l][k] + f[k + 1][r] + s[r] - s[l - 1]);
+			}
+		}
+	}
+	
+	cout << f[1][n];
+	return 0;
+}
+```
+
+
+
+### 数位DP
+
+统计一个区间`[a, b]`内各个数字出现的次数
+
+函数`count(n, x)`：`1~n`中数字`x`出现的次数         `a~b`中数字`x`出现的次数 `= count(b, x) - count(a - 1, x)`
+
+
+
+
 
 
 
@@ -5547,7 +5699,23 @@ getline(cin, s);
     // s1 > s2; 1
     ```
 
+- stoll（str）
+
+    字符串变为longlong
     
+- substr（i, len）
+
+    从第i个位置取长度为len的字符串
+
+    ```
+    s.substr(0, 1);
+    ```
+
+    
+
+
+
+​    
 
 
 
@@ -5566,6 +5734,8 @@ while(x){
 
 ### 数组去重
 
+**一定要先排序！！**
+
 ```C++
 vector<int> res;
 res.push_back(x);
@@ -5574,13 +5744,6 @@ res.erase(unique(res.begin(), res.end()), res.end());
 ```
 
 
-
-```C++
-vector<int> res;
-res.push_back(x);
-sort(res.begin(), res.end());
-unique(res.begin(), res.end());
-```
 
 
 
@@ -5775,6 +5938,8 @@ unique(res.begin(), res.end());
 
    
 
+### 二进制枚举
+
 ### 四舍五入
 
 1. 使用cmath
@@ -5820,6 +5985,15 @@ unique(res.begin(), res.end());
 
     ```C++
     printf("%.2f", 1.245); //1.25
+    ```
+
+
+### 格式输出
+
+1. printf
+
+    ```C++
+    printf("%04d-%02d-%02d", y, m, d); //年份格式化输出
     ```
 
     

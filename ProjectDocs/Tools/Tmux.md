@@ -50,7 +50,7 @@ tmux：
 
 11. **`tmux a`：打开之前挂起的`session`**
 
-12. 按下`Ctrl + a`后手指松开，然后按s：选择其它session
+12. 按下`Ctrl + a`后手指松开，然后按s：**选择其它session**
 
     - 方向键 ——上：选择上一项 `session/window/pane`
     

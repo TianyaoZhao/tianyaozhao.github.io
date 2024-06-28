@@ -1,7 +1,7 @@
 // https://www.acwing.com/problem/content/791/
 const int N = 1e5 + 10;
 int a[N], n;
-// 根据情况写check()函数
+// 根据情况写check()函数,哪个指针跳返回哪个
 bool check(int mid){
 
 }

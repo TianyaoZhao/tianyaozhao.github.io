@@ -3,33 +3,46 @@
 # include <cstring>
 # include <algorithm>
 # include <string>
+# include <cmath>
+# include <stack>
+# include <queue>
+# include <vector>
+# include <iomanip>
+# define io_speed ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
+# define endl '\n'
 using namespace std;
+typedef pair <int, int> PII;
+typedef long long LL;
 const int N = 1e5 + 10;
 int a[N], b[N], c[N];
-int la, lb, lc;
 string sa, sb;
-// 高精度乘法:两个正数相乘, 下标之和相等的在c数组的同一个位置
-void mul(int a[], int b[]){
-    for(int i = 0; i < la; i ++){
-        for(int j = 0; j < lb; j ++){
-            c[i + j] += a[i] * b[j];
-        }
+int la, lb, lc;
+// 高精度乘法:下标之和相等的处在数组c的同一个位置
+void mul(int a[], int b[], int c[]){
+  for(int i = 0; i < la; i ++){
+    for(int j = 0; j < lb; j ++){
+      c[i + j] += a[i] * b[j];
     }
-    for(int i = 0; i < lc; i ++){
-        c[i + 1] += c[i] / 10;    // 进位
-        c[i] %= 10;               // 存余
-    }
-    // 处理前导0
-    while(lc > 0 && c[lc] == 0) lc --;
+  }
+  // 进位
+  for(int i = 0; i < lc; i ++){
+    c[i + 1] += c[i] / 10;
+    c[i] = c[i] % 10;
+  }
+  // 处理前导0
+  while(lc > 0 && c[lc] == 0) lc --;
+}
+void solve(){
+  cin >> sa >> sb;
+  la = sa.size(), lb = sb.size();
+  lc = la + lb;
+  for(int i = 0; i < la; i ++) a[i] = sa[la - i - 1] - '0';
+  for(int i = 0; i < lb; i ++) b[i] = sb[lb - i - 1] - '0';
+  mul(a, b, c);
+  for(int i = lc; i >= 0; i --) cout << c[i];
 }
 int main(){
-    cin >> sa >> sb;
-    la = sa.size();
-    lb = sb.size();
-    lc = la + lb;
-    for(int i = 0; i < la; i ++) a[i] = sa[la - 1 - i] - '0';
-    for(int i = 0; i < lb; i ++) b[i] = sb[lb - 1 - i] - '0';
-    mul(a, b);
-    for(int i = lc; i >= 0; i --) cout << c[i];
-    return 0;
+  io_speed
+  solve();
+  return 0;
 }

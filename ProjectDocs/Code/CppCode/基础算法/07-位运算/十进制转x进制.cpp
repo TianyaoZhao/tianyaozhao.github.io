@@ -25,9 +25,7 @@ void ten2x(int n, int x){
         n = n / x;
     }
     // 反序输出
-    for(int i = k - 1; i >= 0; i --){
-        cout << s[i];
-    }
+    for(int i = k - 1; i >= 0; i --) cout << s[i];
 }
 void solve(){
     cin >> n >> x;

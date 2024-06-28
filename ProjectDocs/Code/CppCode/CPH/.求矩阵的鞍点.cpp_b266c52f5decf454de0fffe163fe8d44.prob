@@ -1,0 +1,1 @@
+{"name":"Local: 求矩阵的鞍点","url":"d:\\Blog\\ProjectDocs\\Code\\CppCode\\机考\\四川大学\\求矩阵的鞍点.cpp","tests":[{"id":1719461871106,"input":"3 4\n1 2 3 4\n1 2 3 4\n1 2 3 4","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Blog\\ProjectDocs\\Code\\CppCode\\机考\\四川大学\\求矩阵的鞍点.cpp","group":"local","local":true}

@@ -1,0 +1,1 @@
+{"name":"Local: 非素数的个数","url":"d:\\Blog\\ProjectDocs\\Code\\CppCode\\机考\\厦门大学\\非素数的个数.cpp","tests":[{"id":1719466084109,"input":"1 10\n1 100","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Blog\\ProjectDocs\\Code\\CppCode\\机考\\厦门大学\\非素数的个数.cpp","group":"local","local":true}

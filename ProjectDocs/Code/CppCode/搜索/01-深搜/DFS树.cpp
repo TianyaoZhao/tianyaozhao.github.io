@@ -5,7 +5,7 @@
 # include <vector>
 using namespace std;
 const int N = 300 + 10;
-int n, m;      // n个点m条边
+int n, m;            // n个点m条边
 vector <int> e[N];   // 链式邻接表,e[u]存放与u点邻接的点
 bool vis[N];
 

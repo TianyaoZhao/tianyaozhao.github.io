@@ -1,52 +1,66 @@
 // https://www.acwing.com/problem/content/794/
-#include <iostream>
-#include <cstring>
-#include <algorithm>
-#include <string>
+# include <iostream>
+# include <cstring>
+# include <algorithm>
+# include <string>
+# include <cmath>
+# include <stack>
+# include <queue>
+# include <vector>
+# include <iomanip>
+# define io_speed ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
+# define endl '\n'
 using namespace std;
+typedef pair <int, int> PII;
+typedef long long LL;
 const int N = 1e5 + 10;
 int a[N], b[N], c[N];
-int la, lb, lc;
 string sa, sb;
-
-// 比较a和b的大小
+int la, lb, lc;
+// 比较 a > b
 bool cmp(int a[], int b[]){
-    // 位数不同
-    if (la != lb) return la > lb;
-    // 位数相同
-    for (int i = la - 1; i >= 0; i --){
-        if (a[i] != b[i]) return a[i] > b[i];
-    }
-    // 大小相等，防止输出-0
-    return true;
+  // 位数不相同
+  if(la != lb) return la > lb;
+  // 位数相同
+  for(int i = lc - 1; i >= 0; i --){
+    if(a[i] != b[i]) return a[i] > b[i];
+  }
+  // 完全相等，防止输出-0
+  return true;  
 }
 
-// 高精度减法：适用于两个正数相减，大数减去小数
-void sub(int a[], int b[]){
-    for (int i = 0; i < lc; i++){
-        if (a[i] < b[i]){ // 借位
-            a[i + 1]--;
-            a[i] += 10;
-        }
-        c[i] = a[i] - b[i]; // 存差
+void sub(int a[], int b[], int c[]){
+  for(int i = 0; i < lc; i ++){
+    if(a[i] < b[i]){
+      a[i + 1] --;      // 借位
+      a[i] += 10;    
     }
-    // 处理前导0
-    // 两数完全相等，最终lc = 0
-    // 两数不相等，lc指向c[]中第一个不为0的数
-    while (lc > 0 && c[lc] == 0) lc--;
+    c[i] = a[i] - b[i]; // 存差
+  }
+  // 去除前导0, 此时lc指向第一个不为0的数，如果答案是0,c[0] = 0, lc = 0;
+  while(lc > 0 && c[lc] == 0) lc --;
+}
+void solve(){
+  cin >> sa >> sb;
+  la = sa.size();
+  lb = sb.size();
+  lc = max(la, lb);
+  
+  for(int i = 0; i < la; i ++) a[i] = sa[la - i - 1] - '0';
+  for(int i = 0; i < lb; i ++) b[i] = sb[lb - i - 1] - '0';
+  
+  // 先判断大小关系
+  if(!cmp(a, b)){
+    swap(a, b);
+    cout << '-';
+  }
+  sub(a, b, c);
+
+  for(int i = lc; i >= 0; i --) cout << c[i];
+
 }
 int main(){
-    cin >> sa >> sb;
-    la = sa.size();
-    lb = sb.size();
-    lc = max(la, lb);
-    for (int i = 0; i < la; i++) a[i] = sa[la - 1 - i] - '0';
-    for (int i = 0; i < lb; i++) b[i] = sb[lb - 1 - i] - '0';
-    if (!cmp(a, b)){
-        cout << "-";
-        swap(a, b);
-    }
-    sub(a, b);
-    for (int i = lc; i >= 0; i--) cout << c[i];
-    return 0;
+  io_speed
+  solve();
+  return 0;
 }

@@ -18,7 +18,11 @@ typedef long long LL;
 // const int N = 
 LL a, b, p;
 LL quickpow(LL a, LL b, LL p){
-    // 如果b是偶数, 先计算 a^(b / 2)次方，直到计算到 a^1
+    if(b == 0) return 1;
+    // b是偶数,折半递归调用
+    if(b % 2 == 0) return quickpow(a, b / 2, p) * quickpow(a, b / 2, p) % p;
+    // b是奇数
+    if(b % 2 == 1) return quickpow(a, b - 1, p) * a % p;
 }
 void solve(){
     cin >> a >> b >> p;

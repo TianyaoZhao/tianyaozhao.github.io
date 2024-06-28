@@ -20,7 +20,7 @@ int main(){
     while(q --){
         int x1, x2, y1, y2;
         cin >> x1 >> y1 >> x2 >> y2;
-        cout << s[x2][y2] - s[x2][y1 -1] - s[x1- 1][y2] + s[x1 - 1][y1 - 1] << endl;
+        cout << s[x2][y2] - s[x2][y1 -1] - s[x1 - 1][y2] + s[x1 - 1][y1 - 1] << endl;
     }
     return 0;
 }

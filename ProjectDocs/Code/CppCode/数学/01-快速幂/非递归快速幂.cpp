@@ -18,9 +18,13 @@ typedef long long LL;
 // const int N = 
 LL a, b, p;
 LL quickpow(LL a, LL b, LL p){
-    if(b == 0) return 1;
-    if(b % 2 == 0) return quickpow(a, b / 2, p) * quickpow(a, b / 2, p) % p;
-    if(b % 2 == 1) return quickpow(a, b - 1, p) * a % p;
+    LL res = 1;
+    while(b){
+        if(b & 1) res = res * a % p;
+        a = a * a % p;  // 可以理解为每次循环，这个底数都会倍增一次，需要用就取出
+        b >>= 1;
+    }
+    return res;
 }
 void solve(){
     cin >> a >> b >> p;
