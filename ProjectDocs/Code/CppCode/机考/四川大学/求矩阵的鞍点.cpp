@@ -50,7 +50,7 @@ void solve(){
             }
         }
     }
-    if(!flag) cout << "No";
+    if(!flag) cout << "NO";
 }
 int main(){
     io_speed

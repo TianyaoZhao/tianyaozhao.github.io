@@ -1,3 +1,7 @@
+[TOC]
+
+
+
 ## 基础算法
 
 ### 排序
@@ -17,7 +21,7 @@ https://www.luogu.com.cn/problem/P1177
 3. 对于左右两段，再递归以上两个过程，直到每段只有一个数，即全部有序
 
 ```cpp
-x int n, a[100005];
+int x int n, a[100005];
 void quicksort(int l, int r){    
     if(l == r) return;    
     int i = l - 1, j = r + 1, x = a[l + r >> 1];    
@@ -2127,6 +2131,10 @@ void bfs(){
 
 ![image-20231115100722998](./.assets/image-20231115100722998.png)
 
+### 剪枝
+
+
+
 ## 图论
 
 ### 图的存储
@@ -3491,7 +3499,13 @@ int main(){
 
 ## 数据结构
 
-### 并查集-$O(1)$
+### 二叉树
+
+![image-20240630110339260](./.assets/image-20240630110339260.png)
+
+### 并查集
+
+时间复杂度-$O(1)$
 
 https://www.luogu.com.cn/problem/P3367
 
@@ -3636,7 +3650,9 @@ int main(){
 }
 ```
 
-### 线段树-$O(logn)$
+### 线段树
+
+时间复杂度-$O(logn)$
 
 **线段树**是基于分治思想的二叉树，用来维护区间信息（区间和、区间最值、区间GCD等），可以在`logn`的时间内执行**区间修改和区间查询**
 
@@ -3669,7 +3685,7 @@ struct node{
 // build(1, 1, 10)
 void build(int p, int l, int r){
     tr[p] = {l, r, w[l]};  //从根节点开始的时候，这个w[l]是没有意义的，只有从叶子回溯更新的时候才有意义
-    if( l == r) return; //是叶子返回
+    if(l == r) return; //是叶子返回
     int m = l + r >> 1; //不是叶子裂开
     bulid(lc, l, m);    //递归建左右儿子
     bulid(rc, m + 1, r);
@@ -3679,8 +3695,20 @@ void build(int p, int l, int r){
 
 **线段树为什么开`4n`的存储空间**
 
-1. 如果$n = 2^m$，$m$为常数，则最底层有$n$个叶子节点，上面一共有$n - 1$个，一共有$2n-1$个
-2. 但是如果出现分叉，按最坏情况考虑，$n$个节点下都分叉，还得加上$2n$，所以一共是$4n$
+1. 区间长度是N，构造线段树的叶子节点的个数是N
+
+2. 深度为K的满二叉树，有$2^k-1$个节点，且第K层的节点数是$2^{k-1}$
+
+3. 假设线段树最后一层有m个叶子节点。倒数第二层有n个叶子节点， n + m  = N
+
+    最好的情况是满二叉树
+
+    ![image-20240629125722194](./.assets/image-20240629125722194.png)
+    $$
+    2^{k-1}=N, k=1 + logN\\
+    节点总数：2^{k}-1=2^{1+logN} - 1 = 2N - 1
+    $$
+    最后一层若是有分叉，再加上2N
 
 
 
@@ -3725,11 +3753,13 @@ void update(int p, int x, int k){
 ```C++
 // 区间查询
 int query(int p, int x, int y){
-    if(x <= tr[p].l && tr[p].r >= y) // 覆盖则返回
+    if(x <= tr[p].l && y >=tr[p].r) // 覆盖则返回
         return tr[p].sum;
     int m = tr[p].l + tr[p].r >> 1; // 不覆盖则裂开
     int sum = 0; //局部变量
+    // 查询区间与左子节点有重复
     if(x <= m) sum += query(lc, x, y);
+    // 查询区间与右子节点有重复
     if(y > m) sum += query(rc, x, y);
     return sum;
 }
@@ -3787,14 +3817,42 @@ struct node{
     int l, r, sum, add;
 }tr[4 * N];
 
-void pushup(int p){ // 向上更新
+// 建树 build(1, 1, n)
+void build(int p, int l, int r){ 
+    tr[p] = {l, r, w[l]};
+    // 叶子节点则返回
+    if(l == r) return;
+    // 非叶子节点则裂开
+    int m = l + r >> 1; 
+    build(lc, l, m);
+    build(rc, m + 1, r);
+
+    // 回溯回传区间和
+    tr[p].sum = tr[lc].sum + tr[rc].sum; 
+}
+
+// 单点修改 update(1, x, k)
+void update(int p, int x, int k){
+    // 叶子节点则修改
+    if(tr[p].l == x && tr[p].r == x){
+        tr[p].sum += k;
+        return;
+    }
+    // 非叶子节点则裂开
+    int m = tr[p].l + tr[p].r >> 1;
+    if(x <= m) update(lc, x, k);
+    if(x > m)  update(rc, x, k);
+
+    // 回溯回传区间和
     tr[p].sum = tr[lc].sum + tr[rc].sum;
 }
-void pushdowm(int p){ // 向下更新
-    if(tr[p].add){
+
+// 懒标记下传 pushdown(p)
+void pushdown(int p){
+    if(tr[p].add){ //有懒标记
         // 修改左右儿子的sum
-        tr[lc].sum += tr[p].add * (tr[lc].r - tr[lc].l + 1);
-        tr[rc].sum += tr[p].add * (tr[rc].r - tr[rc].l + 1);
+        tr[lc].sum += tr[p].add *(tr[lc].r - tr[lc].l + 1);
+        tr[rc].sum += tr[p].add *(tr[rc].r - tr[rc].l + 1);
         // 下传懒标记
         tr[lc].add += tr[p].add;
         tr[rc].add += tr[p].add;
@@ -3802,36 +3860,252 @@ void pushdowm(int p){ // 向下更新
         tr[p].add = 0;
     }
 }
-void bulid(int p, int l, int r){ // 建树
-    tr[p] = {l, r, w[l]};
-    if(l == r) return;   //是叶子返回
-    int m = l + r >> 1;  //不是叶子裂开
-    bulid(lc, l, m);
-    bulid(rc, m + 1, r);
-    pushup(p);
-}
-void update(int p, int x, int y, int k){ //区间修改
-    if(x <= tr[p].l && tr[p].r <= y){ // 覆盖则修改
-    	tr[p].sum += k * (tr[p].r - tr[p].l + 1);
-        tr[p].add += k;
+// 区间修改 modify(1, x, y, k)
+void modify(int p, int x, int y, int k){
+    // 覆盖则懒惰修改
+    if(x <= tr[p].l && y >= tr[p].r){
+        tr[p].sum += k * (tr[p].r - tr[p].l + 1);
+        tr[p].add += k;  // 懒标记
         return;
     }
-    int m = tr[p].l + tr[p].r >> 1; //不覆盖则裂开
-    pushdown(p);
-    if(x <= m) update(lc, x, y, k);
-    if(y > m) update(rc, x, y, k);
-    pushup(p);
+    // 不覆盖则则裂开
+    int m = tr[p].l + tr[p].r >> 1;
+    pushdown(p); // 下传懒标记
+    if(x <= m) modify(lc, x, y, k);
+    if(y > m) modify(rc, x, y, k);
+
+    // 回溯回传区间和
+    tr[p].sum = tr[lc].sum + tr[rc].sum;
 }
-int query(int p, int x, int y){ // 区间查询
-    if(x <= tr[p].l && tr[p].r <= y){ // 覆盖则直接返回
-        return tr[p].sum;
-    }
-    int m = tr[p].l + tr[p].r >> 1; // 不覆盖则裂开
-    pushdown(p); //每个节点上可能有懒标记
+
+// 区间查询 query(1, x, y)
+int query(int p, int x, int y){
+    // 覆盖则返回
+    if(x <= tr[p].l && y >= tr[p].r) return tr[p].sum;
+    // 不覆盖则裂开
+    int m = tr[p].l + tr[p].r >> 1;
+    pushdown(p); // 下传懒标记
     int sum = 0;
     if(x <= m) sum += query(lc, x, y);
-    if(y > m) sum += query(rc, x, y);
+    if(y > m)  sum += query(rc, x, y);
     return sum;
+}
+```
+
+
+
+```C++
+// https://www.acwing.com/problem/content/1266/
+// 动态求区间和
+# include <iostream>
+# include <cstring>
+# include <algorithm>
+# include <string>
+# include <cmath>
+# include <stack>
+# include <queue>
+# include <vector>
+# include <iomanip>
+# define io_speed ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
+# define endl '\n'
+# define lc p << 1
+# define rc p << 1 | 1
+using namespace std;
+typedef pair <int, int> PII;
+typedef long long LL;
+const int N = 1e5 + 10;
+int n, w[N];
+struct node{
+    int l, r, sum;
+}tr[4 * N];
+
+// 建树
+void build(int p, int l, int r){ // build(1, 1, n)
+    tr[p] = {l, r, w[l]};
+    // 是叶子返回
+    if(l == r) return;
+    // 不是叶子裂开
+    int m = l + r >> 1;
+    // 递归建树
+    build(lc, l, m);
+    build(rc, m + 1, r);
+    // 回溯时，回传左右儿子的区间和
+    tr[p].sum = tr[lc].sum + tr[rc].sum;
+}
+
+// 单点修改
+void update(int p, int x, int k){ // update(1, 2, k)
+    // 是叶子节点修改
+    if(tr[p].l == x && tr[p].r == x){
+        tr[p].sum += k;
+        return;
+    }
+    // 不是叶子节点裂开
+    int m = tr[p].l + tr[p].r >> 1;
+    if(x <= m) update(lc, x, k); // 在左儿子
+    if(x > m)  update(rc, x, k); // 在右儿子
+
+    // 回溯回传区间和
+    tr[p].sum = tr[lc].sum + tr[rc].sum;
+}
+
+// 区间查询
+int query(int p, int x, int y){ //query(1, x, y)
+    // 覆盖则返回
+    if(x <= tr[p].l && y >= tr[p].r) return tr[p].sum;
+    // 不覆盖则裂开
+    int m = tr[p].l + tr[p].r >> 1;
+    int sum = 0;
+    if(x <= m) sum += query(lc, x, y);
+    if(y > m)  sum += query(rc, x, y);
+    return sum;
+}
+
+void solve(){
+    int m;
+    cin >> n >> m;
+    for(int i = 1; i <= n; i ++) cin >> w[i];
+    // 建树
+    build(1, 1, n);
+
+    int k, a, b;
+    while(m --){
+        cin >> k >> a >> b;
+        if(k == 0) cout << query(1, a, b) << endl;
+        else update(1, a, b);
+    }
+}
+int main(){
+    io_speed
+    solve();
+    return 0;
+}
+```
+
+
+
+区修+区查
+
+```C++
+// https://www.acwing.com/problem/content/1266/
+// 动态求区间和,动态修改区间
+# include <iostream>
+# include <cstring>
+# include <algorithm>
+# include <string>
+# include <cmath>
+# include <stack>
+# include <queue>
+# include <vector>
+# include <iomanip>
+# define io_speed ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
+# define endl '\n'
+# define lc p << 1
+# define rc p << 1 | 1
+using namespace std;
+typedef pair <int, int> PII;
+typedef long long LL;
+const int N = 1e5 + 10;
+struct node{
+    int l, r, sum, add;
+}tr[4 * N];
+int n, w[N];
+// 建树 build(1, 1, n)
+void build(int p, int l, int r){ 
+    tr[p] = {l, r, w[l]};
+    // 叶子节点则返回
+    if(l == r) return;
+    // 非叶子节点则裂开
+    int m = l + r >> 1; 
+    build(lc, l, m);
+    build(rc, m + 1, r);
+
+    // 回溯回传区间和
+    tr[p].sum = tr[lc].sum + tr[rc].sum; 
+}
+
+// 单点修改 update(1, x, k)
+void update(int p, int x, int k){
+    // 叶子节点则修改
+    if(tr[p].l == x && tr[p].r == x){
+        tr[p].sum += k;
+        return;
+    }
+    // 非叶子节点则裂开
+    int m = tr[p].l + tr[p].r >> 1;
+    if(x <= m) update(lc, x, k);
+    if(x > m)  update(rc, x, k);
+
+    // 回溯回传区间和
+    tr[p].sum = tr[lc].sum + tr[rc].sum;
+}
+
+// 懒标记下传 pushdown(p)
+void pushdown(int p){
+    if(tr[p].add){ //有懒标记
+        // 修改左右儿子的sum
+        tr[lc].sum += tr[p].add *(tr[lc].r - tr[lc].l + 1);
+        tr[rc].sum += tr[p].add *(tr[rc].r - tr[rc].l + 1);
+        // 下传懒标记
+        tr[lc].add += tr[p].add;
+        tr[rc].add += tr[p].add;
+        // 父亲懒标记清空
+        tr[p].add = 0;
+    }
+}
+// 区间修改 modify(1, x, y, k)
+void modify(int p, int x, int y, int k){
+    // 覆盖则懒惰修改
+    if(x <= tr[p].l && y >= tr[p].r){
+        tr[p].sum += k * (tr[p].r - tr[p].l + 1);
+        tr[p].add += k;  // 懒标记
+        return;
+    }
+    // 不覆盖则则裂开
+    int m = tr[p].l + tr[p].r >> 1;
+    pushdown(p); // 下传懒标记
+    if(x <= m) modify(lc, x, y, k);
+    if(y > m) modify(rc, x, y, k);
+
+    // 回溯回传区间和
+    tr[p].sum = tr[lc].sum + tr[rc].sum;
+}
+
+// 区间查询 query(1, x, y)
+int query(int p, int x, int y){
+    // 覆盖则返回
+    if(x <= tr[p].l && y >= tr[p].r) return tr[p].sum;
+    // 不覆盖则裂开
+    int m = tr[p].l + tr[p].r >> 1;
+    pushdown(p); // 下传懒标记
+    int sum = 0;
+    if(x <= m) sum += query(lc, x, y);
+    if(y > m)  sum += query(rc, x, y);
+    return sum;
+}
+void solve(){
+    int m;
+    cin >> n >> m;
+    for(int i = 1; i <= n; i ++) cin >> w[i];
+    // 建树
+    build(1, 1, n);
+
+    int k, a, b, c; 
+    while(m --){
+        cin >> k >> a >> b;
+        if(k == 2){
+            cout << query(1, a, b) << endl;
+        }
+        else{
+            cin >> c;
+            modify(1, a, b, c);
+        }
+    }
+}
+int main(){
+    io_speed
+    solve();
+    return 0;
 }
 ```
 
@@ -4212,7 +4486,15 @@ LL fact[N];
 LL qmi(int )
 ```
 
+### 容斥原理
 
+#### 集合的并集
+
+**容斥原理：**设$U$中元素有$n$种不同的属性，第$i$种属性为$P_i$，拥有属性$P_i$的元素构成集合$S_i$，那么
+$$
+
+$$
+意义：**集合的并**等于**集合的交**的交错和（奇正偶负）
 
 ## 动态规划
 
@@ -4765,7 +5047,9 @@ int main(){
 
 ### 背包DP
 
-#### 01背包
+==背包问题中，max的首项都是对应不放入时的`f[i][j]`的数值==
+
+#### 01 背包
 
 时间复杂度-$O(nm)$
 
@@ -4797,24 +5081,41 @@ int main(){
 二维数组
 
 ```C++
+// https://www.acwing.com/problem/content/2/
+// 每种物品只有一件
 # include <iostream>
 # include <cstring>
 # include <algorithm>
+# include <string>
+# include <cmath>
+# include <stack>
+# include <queue>
+# include <vector>
+# include <iomanip>
+# define io_speed ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
+# define endl '\n'
 using namespace std;
-const int N = 50 + 5, M = 200 + 5;
-int w[N], c[N];
-int n, m;
-int f[N][M];
-int main(){
-    cin >> n >> m;
-    for(int i = 1; i <= n; i ++) cin >> w[i] >> c[i];
+typedef pair <int, int> PII;
+typedef long long LL;
+const int N = 1000 + 10;
+int n, m;        // 数量和容量
+int v[N], w[N];  // 价值和体积
+int f[N][N];     // 前i件物品,背包容量为j时的最大价值
+void solve(){
+    cin >> n >> m; 
+    for(int i = 1; i <= n; i ++) cin >> w[i] >> v[i];
+
     for(int i = 1; i <= n; i ++){
-        for(int j = 1; j <= m; j++){
+        for(int j = 1; j <= m; j ++){
             if(j < w[i]) f[i][j] = f[i - 1][j];
-            else f[i][j] = max(f[i - 1][j], f[i -1][j - w[i]] + c[i]);
+            else f[i][j] = max(f[i - 1][j], f[i - 1][j - w[i]] + v[i]);
         }
     }
-    cout << f[n][m] << endl;
+    cout << f[n][m];
+}
+int main(){
+    io_speed
+    solve();
     return 0;
 }
 ```
@@ -4847,7 +5148,9 @@ int main(){
 }
 ```
 
-完全背包-$O(nm)$
+#### 完全背包
+
+时间复杂度--$O(nm)$
 
 **每种物品有无数多件**
 
@@ -4859,9 +5162,9 @@ int main(){
 
 当前背包容量为`j`，我们要考虑第`i`件物品能否放入？是否放入
 
-1. 如果当前背包容量`j < w[i]`，不能放入，则`f[i][j] = f[i - 1][j]`
+1. 如果当前背包容量`j < w[i]`，不能放入第i件物品，则`f[i][j] = f[i - 1][j]`
 
-2. 如果当前背包容量`j >= w[i]`，能放入，但是要比较代价
+2. 如果当前背包容量`j >= w[i]`，能放入第i件物品，可以试试最多能放入几件，但是要比较代价
 
    1. 如果第`i`件物品不放入背包，则`f[i][j] = f[i - 1][j]`
    2. 如果第`i`件物品放入背包，则`f[i][j] = f[i][j - w[i]] + c[i]`
@@ -4870,13 +5173,13 @@ int main(){
 
 ![](./.assets/image-20231209113812961.png)
 
-
+==核心：放入第i件物品和不放入第i件物品，如果放入第i件物品，考虑最多能放下几件==
 
 **状态转移方程：**
 
 `f[i][j] = f[i - 1][j] j < w[i]`
 
-`f[i][j] = max(f[i -1][j], f[i][j - w[i]] + c[i]) j >= w[i]`
+`f[i][j] = max(f[i - 1][j], f[i][j - w[i]] + c[i]) j >= w[i]`
 
 **边界条件：**`f[i][j] = 0, i or j = 0`
 
@@ -4885,24 +5188,41 @@ int main(){
 二维数组
 
 ```C++
+// https://www.acwing.com/problem/content/3/
+// 每种物品有无数多个，可以一直往背包装
 # include <iostream>
 # include <cstring>
 # include <algorithm>
+# include <string>
+# include <cmath>
+# include <stack>
+# include <queue>
+# include <vector>
+# include <iomanip>
+# define io_speed ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
+# define endl '\n'
 using namespace std;
-const int N = 50 + 5, M = 200 + 5;
-int w[N], c[N];
-int n, m;
-int f[N][M];
-int main(){
-    cin >> n >> m;
-    for(int i = 1; i <= n; i ++) cin >> w[i] >> c[i];
+typedef pair <int, int> PII;
+typedef long long LL;
+const int N = 1000 + 10;
+int n, m;        // 数量和容量
+int v[N], w[N];  // 价值和体积
+int f[N][N];     // 前i件物品,背包容量为j时的最大价值
+void solve(){
+    cin >> n >> m; 
+    for(int i = 1; i <= n; i ++) cin >> w[i] >> v[i];
+
     for(int i = 1; i <= n; i ++){
-        for(int j = 1; j <= m; j++){
-            if(j < w[i]) f[i][j] = f[i - 1][j];
-            else f[i][j] = max(f[i - 1][j], f[i][j - w[i]] + c[i]);
+        for(int j = 1; j <= m; j ++){
+            if(j < w[i]) f[i][j] = f[i - 1][j]; // 放入0件
+            else f[i][j] = max(f[i - 1][j], f[i][j - w[i]] + v[i]);  // 第i件物品不放入背包和放入背包
         }
     }
-    cout << f[n][m] << endl;
+    cout << f[n][m];
+}
+int main(){
+    io_speed
+    solve();
     return 0;
 }
 ```
@@ -4940,6 +5260,137 @@ int main(){
 #### 多重背包
 
 **每种物品有有限件**
+
+**状态变量**：`f[i][j]`表示前`i`件物品放入背包容量为`j`的背包的最大价值
+
+当前背包容量为`j`，我们要考虑第`i`件物品能否放入？是否放入
+
+1. 如果当前背包容量`j < k * w[i]`，不能放入k件物品，**但是可放进`k - 1`件物品**，则`f[i][j] = f[i][j]`
+
+2. 如果当前背包容量`j >=  k * w[i]`，能放入k件物品，但是要从`0~s[i]`循环放入比较，**直到放不进`k`件物品**
+
+    `f[i][j] = max(f[i][j], f[i - 1][j - k * w[i]] + k * v[i])`
+
+**状态转移方程：**
+
+`f[i][j] = f[i][j] j < k * w[i]`
+
+`f[i][j] = max(f[i][j], f[i - 1][j - k * w[i]] + k * v[i]) j >= k * w[i]`
+
+**边界条件：**`f[i][j] = 0, i or j = 0`
+
+==核心：不放入k件物品和放入k件物品，如果放入k件物品，考虑最多可以放进几个k件==
+
+```C++
+// https://www.acwing.com/problem/content/3/
+// 每种物品有有限多个，可以一直往背包装
+# include <iostream>
+# include <cstring>
+# include <algorithm>
+# include <string>
+# include <cmath>
+# include <stack>
+# include <queue>
+# include <vector>
+# include <iomanip>
+# define io_speed ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
+# define endl '\n'
+using namespace std;
+typedef pair <int, int> PII;
+typedef long long LL;
+const int N = 1000 + 10;
+int n, m;              // 数量和容量
+int v[N], w[N], s[N];  // 价值和体积,每种物品的数量
+int f[N][N];           // 前i件物品,背包容量为j时的最大价值
+void solve(){
+    cin >> n >> m; 
+    for(int i = 1; i <= n; i ++) cin >> w[i] >> v[i] >> s[i];
+
+    for(int i = 1; i <= n; i ++){
+        for(int j = 1; j <= m; j ++){
+           for(int k = 0; k <= s[i]; k ++){
+                if(k * w[i] > j) f[i][j] = f[i][j];                              //当前装不下k件物品
+                else f[i][j] = max(f[i][j], f[i - 1][j - k * w[i]] + k * v[i]);  //当前可装下k件物品
+           }
+        }
+    }
+    cout << f[n][m];
+}
+int main(){
+    io_speed
+    solve();
+    return 0;
+}
+```
+
+#### 分组背包
+
+**每组物品有若干类，同一组内的物品最多只能选一类**
+
+**状态变量**：`f[i][j]`表示前`i`组物品放入背包容量为`j`的背包的最大价值
+
+1. 不选第i组物品，`f[i][j] = f[i - 1][j]`
+
+2. 选第i组物品，考虑放**哪一个**物品价值最大
+
+    `f[i][j] = max(f[i][j], f[i - 1][j - w[i][k]] + v[i][k])`
+
+==核心：选第i组和不选第i组，选第i组，考虑放哪个物品价值最大==
+
+```C++
+// https://www.acwing.com/problem/content/9/
+// 每组物品有若干类，同一组内的物品最多只能选一类
+# include <iostream>
+# include <cstring>
+# include <algorithm>
+# include <string>
+# include <cmath>
+# include <stack>
+# include <queue>
+# include <vector>
+# include <iomanip>
+# define io_speed ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
+# define endl '\n'
+using namespace std;
+typedef pair <int, int> PII;
+typedef long long LL;
+const int N = 100 + 10;
+int w[N][N], v[N][N]; // 第i组第j个物品的重量和价值
+int s[N];             // 每组的物品种类数
+int n, m;             // 物品组数背包容量
+int f[N][N];          // 前i组物品背包容量为j时的最大价值
+void solve(){
+    cin >> n >> m;
+    for(int i = 1; i <= n; i ++){
+        cin >> s[i];
+        for(int j = 1; j <= s[i]; j ++){
+            cin >> w[i][j] >> v[i][j];
+        }
+    }
+
+    for(int i = 1; i <= n; i ++){ // 枚举组数
+        for(int j = 1; j <= m; j ++){ // 枚举容量
+            // 不选第i组
+            f[i][j] = f[i - 1][j];
+            // 选第i组
+            for(int k = 1; k <= s[i]; k ++){ // 枚举所有选择
+                if(w[i][k] <= j){
+                    f[i][j] = max(f[i][j], f[i - 1][j - w[i][k]] + v[i][k]);
+                }
+            }
+        }
+         
+    }
+    cout << f[n][m];
+
+
+}
+int main(){
+    io_speed
+    solve();
+    return 0;
+}
+```
 
 
 
@@ -4997,14 +5448,6 @@ int main(){
 	return 0;
 }
 ```
-
-
-
-### 数位DP
-
-统计一个区间`[a, b]`内各个数字出现的次数
-
-函数`count(n, x)`：`1~n`中数字`x`出现的次数         `a~b`中数字`x`出现的次数 `= count(b, x) - count(a - 1, x)`
 
 
 
@@ -5668,7 +6111,7 @@ getline(cin, s);
     a.erase(a.begin(), a.end())
     ```
 
-- find
+- **s.find**
 
     字符串查找返回字符出现的位置
 
@@ -5677,7 +6120,7 @@ getline(cin, s);
     cout << s.find("de");  //4 
     ```
 
-- compare
+- **s.compare**
 
     判断两个字符串是否相等
 
@@ -5699,11 +6142,11 @@ getline(cin, s);
     // s1 > s2; 1
     ```
 
-- stoll（str）
+- **stoll（str）**
 
     字符串变为longlong
     
-- substr（i, len）
+- **substr（i, len）**
 
     从第i个位置取长度为len的字符串
 

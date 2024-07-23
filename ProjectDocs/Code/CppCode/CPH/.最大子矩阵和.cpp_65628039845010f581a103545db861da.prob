@@ -1,0 +1,1 @@
+{"name":"Local: 最大子矩阵和","url":"d:\\Blog\\ProjectDocs\\Code\\CppCode\\动态规划\\线性DP\\最大子矩阵和.cpp","tests":[{"id":1719747397931,"input":"4\n0 -2 -7 0\n9 2 -6 2\n-4 1 -4  1\n-1 8  0 -2\n","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Blog\\ProjectDocs\\Code\\CppCode\\动态规划\\线性DP\\最大子矩阵和.cpp","group":"local","local":true}

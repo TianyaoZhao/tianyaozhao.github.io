@@ -1,0 +1,1 @@
+{"name":"Local: 小猫爬山","url":"d:\\Blog\\ProjectDocs\\Code\\CppCode\\搜索\\03-剪枝\\小猫爬山.cpp","tests":[{"id":1719649261344,"input":"4 12\n3 5 6 9","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Blog\\ProjectDocs\\Code\\CppCode\\搜索\\03-剪枝\\小猫爬山.cpp","group":"local","local":true}

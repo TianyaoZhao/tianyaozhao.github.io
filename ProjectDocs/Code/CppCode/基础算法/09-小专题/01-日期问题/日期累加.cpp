@@ -17,7 +17,7 @@ typedef long long LL;
 // const int N = 
 int T;
 int days[13] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}; 
-bool check(int year, int month, int day){
+inline bool check(int year, int month, int day){
     if(day == 0) return false;
     if(month > 12 || month < 1) return false;
     if(month != 2 ){
